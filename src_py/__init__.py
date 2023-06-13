@@ -41,9 +41,3 @@ class chiffre:
         for coordinate in coordinates:
             text += self.square[coordinate[0]][coordinate[1]]
         return text
-
-
-c = chiffre(6, "hallo")
-
-code = c.encrypt("Guten Tag. Wie geht es dir?")
-print(code, c.decrypt(code))
