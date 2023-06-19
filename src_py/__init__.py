@@ -1,7 +1,7 @@
 import numpy as np
 
 class chiffre:
-    def __init__(self, size, key="") -> None:
+    def __init__(self, key="", size=10) -> None:
         self.square = np.zeros((size, size), dtype=str)
         self.key = key
         self.size = size
@@ -22,7 +22,7 @@ class chiffre:
                     continue
                 break
 
-    def encrypt(self, text):
+    def encrypt(self, text, string=False):
         # make list of coordinates of letters in text
         coordinates = []
         for letter in text:
@@ -34,9 +34,14 @@ class chiffre:
                 else:
                     continue
                 break
+        if string:
+            return "".join([str(x[0]) + str(x[1]) for x in coordinates])
         return coordinates
     
     def decrypt(self, coordinates):
+        if type(coordinates) == str:
+            coordinates = [(int(coordinates[i]), int(coordinates[i+1])) for i in range(0, len(coordinates), 2)]
+
         text = ""
         for coordinate in coordinates:
             text += self.square[coordinate[0]][coordinate[1]]
